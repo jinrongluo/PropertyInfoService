@@ -1,0 +1,108 @@
+swagger: '2.0'
+info:
+  title: PropertyInfo API
+  description: A Property Information Spring Cloud REST Application
+  version: 1.0.0
+paths:
+  /properties:
+    get:
+      tags:
+        - Get properties
+      summary: Returns a list of properties.
+      description: Returns a list of properties.
+      produces:
+        - application/json
+      responses:
+        '200':  
+          description: A JSON array of properties information
+          schema: 
+            type: array
+            items: 
+              $ref: '#/definitions/propertyInfo'
+    post:
+      tags:
+        - create property
+      summary: Create a property
+      description: Create a property information
+      parameters:
+        - name: createProperty
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/propertyInfo'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Return the created property information
+          schema:
+             $ref: '#/definitions/propertyInfo'
+  /properties/{id}:
+    get:
+      tags:
+        - get property detail
+      summary: Return property detail.
+      description: Return property detail.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A JSON object of property information
+          schema:
+            $ref: '#/definitions/propertyInfo'
+    put:
+      tags:
+        - update property detail
+      summary: Update property detail.
+      description: Update property detail.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: updateProperty
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/propertyInfo'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A JSON object of property information
+          schema:
+            $ref: '#/definitions/propertyInfo'
+    delete:
+      tags:
+        - delete property detail
+      summary: Delete property detail.
+      description: Delete property detail.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: success operation
+definitions:
+  propertyInfo:
+    type: object
+    properties:
+      propertyId: 
+        type: string
+      year:
+        type: integer
+      buildingType:
+        type: string
+      area:
+        type: integer
+      features:
+        type: string
+      mgtFee:
+        type: number
